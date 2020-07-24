@@ -45,8 +45,18 @@ function removeFromCart(item) {
       cart.splice(i, 1); //removes 1 item at index i
       return cart;
     }
+  }
+
+  if (item != cart[item]) {
+    return "That item is not in your cart."
+  }
 }
 
 function placeOrder(cardNumber) {
-  // write your code here
+  if (typeof(cardNumber) === "undefined"){
+    return "Sorry, we don't have a credit card on file for you."
+  } else {
+    cart = [];
+    return `Your total cost is $${total}, which will be charged to the card ${cardNumber}.`
+  }
 }
