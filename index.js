@@ -17,18 +17,25 @@ function addToCart(item) {
 
 function viewCart() {
   if (cart.length === 0) {
-    return "Your shopping cart is empty."
-  } else if (cart.length === 1) {
-    return `In your cart, you have ${cart[0].itemName} at $${cart[0].itemPrice}.`
-  } else if (cart.length === 2) {
-    return `In your cart, you have ${cart[0].itemName} at $${cart[0].itemPrice}, and ${cart[1].itemName} at $${cart[1].itemPrice}.`
-  } else {
-    var myString = "In your cart, you have "
-    for(var i = 0; i < cart.length - 1; i++) {
-      myString = myString + `${cart[i].itemName} at $${cart[i].itemPrice}, `
-    }
-    return myString + `and ${cart[cart.length - 1].itemName} at $${cart[cart.length - 1].itemPrice}.`
+    console.log("Your shopping cart is empty.")
   }
+  var newarray = [];
+    for (var i = 0; i < cart.length; i++) {
+      var keys = Object.keys(cart[i])[0]
+      newarray.push(keys + " at $" + cart[i][keys])
+
+    }
+    var mystring = "In your cart, you have "
+    if (newarray.length === 1) {
+      mystring +=newarray + "."
+    } else if (newarray.length === 2) {
+      mystring += (newarray[0] + " and " + newarray[1] + ".")
+    } else if (newarray.length > 2) {
+      var lastelement = newarray.pop()
+      var other_item = newarray.join(", ")
+      mystring += (other_item + ", and " + lastelement + ".")
+    }
+    console.log(mystring)
 }
 
 function total() {
