@@ -16,26 +16,33 @@ function addToCart(item) {
 }
 
 function viewCart() {
+  var cartEverything = 'In your cart, you have';
+  var cartItems = [];
+  var cartPrices = [];
   if (cart.length === 0) {
-    console.log("Your shopping cart is empty.")
-  }
-  var newarray = [];
-    for (var i = 0; i < cart.length; i++) {
-      var keys = Object.keys(cart[i])[0]
-      newarray.push(keys + " at $" + cart[i][keys])
+    console.log( 'Your shopping cart is empty.');
+  } else {
+    let i = 0;
+    while (cart.length > i) {
+      cartItems.push(Object.keys(cart[i]));
+      cartPrices.push(' at $' + cart[i][Object.keys(cart[i])]);
+      cartEverything += ( ' ' + cartItems[i] + cartPrices[i] );
 
+      if ((2 < cart.length) && ((i) != (cart.length - 1))) {
+        cartEverything += ',';
+
+        if ((1 < cart.length) && ((i + 1) === (cart.length - 1))) {
+        cartEverything += (' and');
+        }
+
+      } else if ((1 < cart.length) && ((i + 1) === (cart.length - 1))) {
+        cartEverything += (' and');
+
+      }
+    console.log(i++);
     }
-    var mystring = "In your cart, you have "
-    if (newarray.length === 1) {
-      mystring +=newarray + "."
-    } else if (newarray.length === 2) {
-      mystring += (newarray[0] + " and " + newarray[1] + ".")
-    } else if (newarray.length > 2) {
-      var lastelement = newarray.pop()
-      var other_item = newarray.join(", ")
-      mystring += (other_item + ", and " + lastelement + ".")
-    }
-    console.log(mystring)
+  }
+  console.log( cartEverything + '.');
 }
 
 function total() {
