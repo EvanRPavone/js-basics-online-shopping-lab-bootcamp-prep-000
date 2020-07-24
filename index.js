@@ -16,31 +16,20 @@ function addToCart(item) {
 }
 
 function viewCart() {
-  var cartEverything = 'In your cart, you have';
-  var cartItems = [];
-  var cartPrices = [];
   if (cart.length === 0) {
-    console.log( 'Your shopping cart is empty.');
+    return "Your shopping cart is empty."
+  } else if (cart.length === 1) {
+    return `In your cart, you have ${cart[0].itemName} at $${cart[0].itemPrice}.`
+  } else if (cart.length === 2) {
+    return `In your cart, you have ${cart[0].itemName} at $${cart[0].itemPrice}, and ${cart[1].itemName} at $${cart[1].itemPrice}.`
   } else {
-    let i = 0;
-    while (cart.length > i) {
-      cartItems.push(Object.keys(cart[i]));
-      cartPrices.push(' at $' + cart[i][Object.keys(cart[i])]);
-      cartEverything += ( ' ' + cartItems[i] + cartPrices[i] );
-
-      if ((2 < cart.length) && ((i) != (cart.length - 1))) {
-        cartEverything += ',';
-
-        if ((1 < cart.length) && ((i + 1) === (cart.length - 1))) {
-        cartEverything += (' and');
-        }
-
-      } else if ((1 < cart.length) && ((i + 1) === (cart.length - 1))) {
-        cartEverything += (' and');
-
-      }
-    console.log(i++);
+    var myString = "In your cart, you have "
+    for(var i = 0; i < cart.length - 1; i++) {
+      myString = myString + `${cart[i].itemName} at $${cart[i].itemPrice}, `
     }
+    return myString + `and ${cart[cart.length - 1].itemName} at $${cart[cart.length - 1].itemPrice}.`
+  }
+}
   }
   console.log( cartEverything + '.');
 }
